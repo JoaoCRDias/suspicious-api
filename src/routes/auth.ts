@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import { NextFunction, Request, Response, Router } from "express";
 import jwt from "jsonwebtoken";
+import { cloneDeep } from "lodash";
 import User from "../models/User";
 
 const secret = String(process.env.JWT_SECRET);
@@ -38,9 +39,10 @@ auth.post("/login", async (req: Request, res: Response) => {
   if (!(await comparePassword(password, user.password)))
     return res.status(401).json({ error: "Senha inválida" });
 
-  user.password = undefined;
+  const userResponse = cloneDeep(user) as any;
+  userResponse.password = undefined;
 
-  const token = jwt.sign({ user }, secret);
+  const token = jwt.sign({ userResponse }, secret);
 
   res.json({ token });
 });

@@ -6,9 +6,8 @@ import { auth } from "./routes/auth";
 import { users } from "./routes/users";
 
 dotenv.config();
-
 const app = express();
-const port = 3000;
+const port = Number(process.env.PORT);
 
 app.use(bodyParser.json());
 
@@ -16,15 +15,19 @@ app.use(bodyParser.json());
 
 app.use(auth);
 app.use(users);
+app.use("/", (req, res) => res.json({ message: "Its working..." }));
 
 mongoose
-  .connect("mongodb://127.0.0.1:27017/casa-do-criador", {
-    useNewUrlParser: true
-  } as ConnectOptions)
+  .connect(
+    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PWD}@${process.env.DB_URI}/suspicious-db`,
+    {
+      useNewUrlParser: true
+    } as ConnectOptions
+  )
   .then((res) => {
     console.log("Connected to mongoDB");
-    app.listen(port, () => {
-      console.log(`Server started on port ${port}`);
-    });
+    app.listen(port, "0.0.0.0", 0, () =>
+      console.log(`Servidor rodando na porta ${port}`)
+    );
   })
   .catch((error) => console.log(error));
