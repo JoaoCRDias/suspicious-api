@@ -49,10 +49,8 @@ jobs:
         docker push southamerica-east1-docker.pkg.dev/$PROJECT_ID/suspicious/$IMAGE_NAME:$GIT_TAG
 
     - name: Deploy to Cloud Run
-        id: deploy
         uses: google-github-actions/deploy-cloudrun@v0
         with:
           service: suspicious-api
           region: southamerica-east1
-          # NOTE: If using a pre-built image, update the image name here
           image: southamerica-east1-docker.pkg.dev/$PROJECT_ID/suspicious/$IMAGE_NAME
