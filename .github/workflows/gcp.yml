@@ -30,6 +30,8 @@ jobs:
       run: |-
         gcloud auth configure-docker --quiet
         gcloud auth configure-docker us-west2-docker.pkg.dev --quiet
+    - name: Login Docker
+      run: docker login -u _json_key -p ${{ secrets.SERVICE_ACCOUNT_KEY }}
     - name: Push Docker Image to Container Registry (GCR)
       env:
         GIT_TAG: ${{ steps.increment-git-tag.outputs.git-tag }}
