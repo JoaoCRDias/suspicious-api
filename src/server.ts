@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 
 app.use(auth);
 app.use(users);
-app.use("/", (req, res) => res.json({ message: "Its working..." }));
+app.use("/", (req, res) => res.json({ message: "It works..." }));
 
 mongoose
   .connect(
