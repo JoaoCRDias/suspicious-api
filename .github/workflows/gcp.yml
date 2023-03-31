@@ -57,4 +57,10 @@ jobs:
         service: pet-charm-api
         region: southamerica-east1
         image: southamerica-east1-docker.pkg.dev/pet-charm/api-images/pet-charm-api:latest
-        env_vars_file: '../../env_vars.txt'
+        env_vars: |
+          JWT_SECRET=${{env.env-vars.JWT_SECRET}}
+          DB_NAME=${{env.env-vars.DB_NAME}}
+          DB_ADDRESS=${{env.env-vars.DB_ADDRESS}}
+          DB_USER=${{env.env-vars.DB_USER}}
+          DB_PWD=${{env.env-vars.DB_PWD}}
+          DB_URI=${{env.env-vars.DB_URI}}
