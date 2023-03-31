@@ -57,3 +57,4 @@ jobs:
         service: pet-charm-api
         region: southamerica-east1
         image: southamerica-east1-docker.pkg.dev/pet-charm/api-images/pet-charm-api:latest
+        env_vars_file: '../../.env'
