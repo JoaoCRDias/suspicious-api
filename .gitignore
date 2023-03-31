@@ -6,3 +6,4 @@ yarn-error.log
 keys.json
 .env.yaml
 gha-creds-*.json
+env_vars.txt
