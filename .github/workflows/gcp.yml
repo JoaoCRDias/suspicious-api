@@ -35,9 +35,7 @@ jobs:
         bash ./scripts/git_update.sh -v major
 
     - name: Configure Docker Client
-      run: |-
-        gcloud auth configure-docker --quiet
-        gcloud auth configure-docker southamerica-east1-docker.pkg.dev --quiet
+      run: gcloud auth configure-docker southamerica-east1-docker.pkg.dev --quiet
 
     - name: Push Docker Image to Artifact Registry
       env:
@@ -53,4 +51,4 @@ jobs:
       with:
         service: suspicious-api
         region: southamerica-east1
-        image: southamerica-east1-docker.pkg.dev/$PROJECT_ID/suspicious/$IMAGE_NAME
+        image: southamerica-east1-docker.pkg.dev/suspicious-project-381323/suspicious/suspicious-api
