@@ -25,6 +25,11 @@ jobs:
       with:
         credentials_json: '${{ secrets.SERVICE_ACCOUNT_KEY }}'
 
+    - name: Create env file
+      run: |
+        touch .env
+        echo ${{ secrets.ENGINE_API_KEY }} >> .env
+
     - name: Build Docker Image
       run: docker build -t $IMAGE_NAME:latest .
 
